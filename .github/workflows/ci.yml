@@ -4,6 +4,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
       - name: Hello devs!
         run: echo "Hello! from ${{ github.workflow }} triggered by the ${{ github.event_name }} done by ${{ github.actor }}"
+        
+      - name: More and more
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "Job Context: $JOB_CONTEXT"
+          echo "Github Context: $GITHUB_CONTEXT"
+          echo "Done!"
+        
+
